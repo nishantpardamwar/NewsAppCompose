@@ -78,9 +78,11 @@ private fun HomeScreen(state: HomeState, onSearchQuery: (String) -> Unit, onNews
             })
         }
     }) { padding ->
-        Box(modifier = Modifier
-            .fillMaxSize()
-            .padding(padding), Alignment.Center) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding), Alignment.Center
+        ) {
             when {
                 state.isLoading.not() && state.error != null -> {
                     Failure(error = state.error ?: "Something went wrong")
@@ -193,15 +195,8 @@ fun HomeScreenLoadingPreview() {
 fun HomeScreenNewsPreview() {
     val state = HomeState.initialState.copy(
         isLoading = false, news = listOf(
-            Articles(
-                title = "Test News 1",
-                description = "TestDescription 1",
-                url = "https://cdn.mos.cms.futurecdn.net/UcTGD83RyG7gkpFTmgNKME-1200-80.jpg"
-            ), Articles(
-                title = "Test News 2",
-                description = "TestDescription 2",
-                url = "https://cdn.mos.cms.futurecdn.net/UcTGD83RyG7gkpFTmgNKME-1200-80.jpg"
-            )
+            Articles(title = "Test News 1", description = "TestDescription 1"),
+            Articles(title = "Test News 2", description = "TestDescription 2")
         )
     )
 
