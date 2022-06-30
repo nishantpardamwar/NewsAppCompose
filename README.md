@@ -4,7 +4,7 @@ Focus of this app is to demonstrate (Not necessarily the best practices)
 - Jetpack Compose
 - MVVM Architecture
 - Kotlin Flow
-- Hilt
+- Dagger Hilt
 
 # Screenshots
 
@@ -28,7 +28,7 @@ You will require Android Studio 3.0 (or newer).
 ### Libraries
 - Jetpack Compose
 - Coil
-- Hilt Dagger
+- Dagger Hilt
 - Retrofit
 - Kotlin Coroutines/Flow
 
