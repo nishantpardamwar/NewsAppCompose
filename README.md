@@ -8,7 +8,13 @@ Focus of this app is to demonstrate (Not necessarily the best practices)
 
 # Screenshots
 
-<img alt="NewsApp Home" height="450px" src="https://raw.githubusercontent.com/nishantpardamwar/NewsAppCompose/master/screen1.png" /> <img alt="NewsApp Search" height="450px" src="https://raw.githubusercontent.com/nishantpardamwar/NewsAppCompose/master/screen2.png" />
+### Dark Theme
+
+<img alt="NewsApp Home" height="450px" src="https://raw.githubusercontent.com/nishantpardamwar/NewsAppCompose/master/screen1.jpg" /> <img alt="NewsApp Search" height="450px" src="https://raw.githubusercontent.com/nishantpardamwar/NewsAppCompose/master/screen2.jpg" />
+
+### Light Theme
+
+<img alt="NewsApp Home" height="450px" src="https://raw.githubusercontent.com/nishantpardamwar/NewsAppCompose/master/screen3.jpg" /> <img alt="NewsApp Search" height="450px" src="https://raw.githubusercontent.com/nishantpardamwar/NewsAppCompose/master/screen4.jpg" />
 
 
 # Setup
