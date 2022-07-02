@@ -3,6 +3,7 @@ package com.nishantpardamwar.newsappcompose.viewmodels
 import androidx.lifecycle.viewModelScope
 import com.nishantpardamwar.newsappcompose.repo.Repo
 import com.nishantpardamwar.newsappcompose.states.HomeState
+import com.nishantpardamwar.newsappcompose.states.NewsCategory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -25,13 +26,28 @@ class HomeVM @Inject constructor(
                 queryNews(it)
             }.launchIn(viewModelScope)
         }
+        viewModelScope.launch(Dispatchers.Default) {
+            val categories = repo.getNewsCategories()
+            val selectedCategory = categories.firstOrNull()
+            val selectedCategoryIndex = 0
+            setState {
+                copy(
+                    newsCategories = categories,
+                    selectedCategory = selectedCategory,
+                    selectedCategoryIndex = selectedCategoryIndex
+                )
+            }
+            if (selectedCategory != null) {
+                loadHeadLines(selectedCategory, selectedCategoryIndex)
+            }
+        }
     }
 
-    fun loadHeadLines() {
+    fun loadHeadLines(newsCategory: NewsCategory, index: Int) {
         viewModelScope.launch(Dispatchers.Default) {
             setState {
                 copy(
-                    isLoading = true
+                    isLoading = true, selectedCategoryIndex = index, showNewCategoryTabs = true
                 )
             }
             val countryCode = try {
@@ -41,7 +57,7 @@ class HomeVM @Inject constructor(
             }
 
             try {
-                val news = repo.getTopHeadlines(countryCode)
+                val news = repo.getTopHeadlines(countryCode, newsCategory.category)
                 setState {
                     copy(
                         isLoading = false, news = news.articles ?: emptyList()
@@ -60,7 +76,11 @@ class HomeVM @Inject constructor(
     fun loadNews(query: String) {
         viewModelScope.launch {
             if (query.isBlank()) {
-                loadHeadLines()
+                val selectedCategory = currentState.selectedCategory
+                val selectedCategoryIndex = currentState.selectedCategoryIndex
+                if (selectedCategory != null) {
+                    loadHeadLines(selectedCategory, selectedCategoryIndex)
+                }
             } else {
                 queryFlow.emit(query)
             }
@@ -70,7 +90,7 @@ class HomeVM @Inject constructor(
     private suspend fun queryNews(query: String) = withContext(Dispatchers.Default) {
         setState {
             copy(
-                isLoading = true
+                isLoading = true, showNewCategoryTabs = false
             )
         }
 

@@ -13,7 +13,7 @@ interface RetrofitApiInterface {
 
     @GET("/v2/top-headlines")
     suspend fun getTopHeadlines(
-        @Query("apiKey") apiKey: String, @Query("country") countryCode: String
+        @Query("apiKey") apiKey: String, @Query("country") countryCode: String, @Query("category") category: String
     ): NewsResponse
 
     @GET("/v2/everything")
