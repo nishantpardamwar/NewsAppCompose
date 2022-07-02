@@ -7,14 +7,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.updateAndGet
 
-open class BaseVM<State : BaseState>(initialState: State) : ViewModel() {
-    private val stateFlow = MutableStateFlow(initialState)
+open class BaseVM<STATE : BaseState>(initialState: STATE) : ViewModel() {
+    private val _state = MutableStateFlow(initialState)
 
-    val state = stateFlow.asStateFlow()
+    val state = _state.asStateFlow()
 
-    fun setState(block: State.() -> State) {
-        stateFlow.update {
-            it.block()
-        }
-    }
+    val currentState: STATE get() = state.value
+
+    fun setState(update: STATE.() -> STATE) = _state.updateAndGet(update)
 }

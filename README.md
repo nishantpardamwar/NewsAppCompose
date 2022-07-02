@@ -16,7 +16,7 @@ You will require Android Studio 3.0 (or newer).
 
 - Git Clone the repo
 - ### Get the API Key from [NewsAPI](https://newsapi.org/)
-- Find the file named `AppModule` and replace `YOUR_API_KEY` with your api key
+- Replace `YOUR NEWS API KEY` in build.gradle with your api key
 - Build app and enjoy :)
 
 # Architecture
